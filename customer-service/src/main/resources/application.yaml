@@ -1,0 +1,14 @@
+server:
+  port: 9010
+
+spring:
+  application:
+    name: customer-service
+
+
+#observability configurations
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
