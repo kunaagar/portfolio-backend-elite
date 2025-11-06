@@ -1,0 +1,15 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/kunaagar/portfolio-backend-elite.git
+          username: ${LOCAL_GIT_USERNAME}
+          password: ${LOCAL_GIT_PASSWORD}
+          search-paths: config-repo
