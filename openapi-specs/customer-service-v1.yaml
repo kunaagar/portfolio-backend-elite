@@ -1,0 +1,115 @@
+openapi: 3.0.3
+info:
+  title: Customer Service API
+  version: 1.0.0
+  description: |
+    Customer Service handles customer-related operations and aggregates profile information from the Profile Service.
+tags:
+  - name: Customers
+    description: Manage Customers and their related data
+
+servers:
+  - url: http://localhost:9010
+    description: Local instance of customer-service
+
+paths:
+  /api/v1/customers/{id}:
+    get:
+      tags:
+        - Customers
+      summary: Get Customer by ID
+      description: Fetch customer details by ID, enriched with profile information from Profile Service.
+      operationId: getCustomerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique customer ID
+      responses:
+        "200":
+          description: Customer details fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        "404":
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/customers:
+    post:
+      tags:
+        - Customers
+      summary: Create a new Customer
+      description: Creates a new customer and stores base information.
+      operationId: createCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreateRequest'
+      responses:
+        "201":
+          description: Customer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    Customer:
+      type: object
+      required:
+        - id
+        - name
+        - email
+      properties:
+        id:
+          type: string
+          example: "cust-001"
+        name:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          example: "john.doe@example.com"
+
+    CustomerCreateRequest:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+          example: "Jane Doe"
+        email:
+          type: string
+          format: email
+          example: "jane.doe@example.com"
+
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "ERR_NOT_FOUND"
+        message:
+          type: string
+          example: "Customer not found"
+
+    
