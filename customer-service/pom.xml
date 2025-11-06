@@ -64,6 +64,12 @@
 			<artifactId>junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+		</dependency>
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -102,6 +108,33 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<!-- Plugin : to generate open api stub components -->
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-customer-api-code</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<generatorName>spring</generatorName>
+							<inputSpec>${project.basedir}/../openapi-specs/customer-service-v1.yaml</inputSpec>
+							<output>${project.build.directory}/generated-sources/customer</output>
+							<apiPackage>com.portfolio.elite.customerservice.v1.api</apiPackage>
+							<modelPackage>com.portfolio.elite.customerservice.v1.model</modelPackage>
+							<configOptions>
+								<useJakartaEe>true</useJakartaEe>
+								<interfaceOnly>true</interfaceOnly>
+								<useTags>true</useTags>
+								<skipDefaultInterface>true</skipDefaultInterface>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
