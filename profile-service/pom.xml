@@ -106,6 +106,32 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-profile-service-api-code</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configOptions>
+                                <useJakartaEe>true</useJakartaEe>
+                                <interfaceOnly>true</interfaceOnly>
+                                <useTags>true</useTags>
+                                <skipDefaultInterface>true</skipDefaultInterface>
+                            </configOptions>
+                            <generatorName>spring</generatorName>
+                            <inputSpec>${project.basedir}/../openapi-specs/profile-service-v1.yaml</inputSpec>
+                            <output>${project.build.directory}/generated-sources/</output>
+                            <apiPackage>${project.groupId}.profileservice.v1.api</apiPackage>
+                            <modelPackage>${project.groupId}.profileservice.v1.model</modelPackage>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
