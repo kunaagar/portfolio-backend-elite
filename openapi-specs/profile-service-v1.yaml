@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: Profile Service API
+  description: Manage Customer Profile information
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:9011
+    description: Local instance of profile-service
+
+tags:
+  - name: Profiles
+    description: Manage profiles of customers.
+
+paths:
+  /api/v1/profiles/{id}:
+    get:
+      tags:
+        - Profiles
+      operationId: getProfileById
+      summary: Get Profile by Id
+      description: Fetch customer profile details by id like gender, age, DOB etc
+      parameters:
+        - name: id
+          in: path
+          description: unique profile id.
+          required: true
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: Profile details fetched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProfileResponse"
+
+        404:
+          description: Profile for given id does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+
+components:
+  schemas:
+    GetProfileResponse:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          example: "prof-01"
+        gender:
+          type: string
+          example: "Male"
+        age:
+          type: integer
+          example: 31
+        dob:
+          type: string
+          example: "1994-06-10"
+
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "ERR_NOT_FOUND"
+        message:
+          type: string
+          example: "Customer not found"
+
+
+
