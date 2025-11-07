@@ -1,0 +1,5 @@
+#to be added
+
+logging:
+  level:
+    com.portfolio.elite: DEBUG
