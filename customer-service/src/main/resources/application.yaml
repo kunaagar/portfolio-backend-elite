@@ -5,10 +5,12 @@ spring:
   application:
     name: customer-service
 
+  config:
+    import: configserver:http://localhost:8888
 
 #observability configurations
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,prometheus
+        include: health,info,prometheus,refresh
