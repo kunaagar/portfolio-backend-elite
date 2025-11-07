@@ -1,4 +1,4 @@
 #greeting config
 customer:
   service:
-    message: "Customer:: message from config-server"
+    message: "Customer:: message from config-server | test update from gitrepo"
