@@ -1,0 +1,4 @@
+#greeting config
+profile:
+  service:
+    message: "Profile:: message from config-server | test update from gitrepo"
