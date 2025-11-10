@@ -87,6 +87,18 @@ components:
           type: string
           format: email
           example: "john.doe@example.com"
+        profileInfo:
+          type: object
+          properties:
+            gender:
+              type: string
+              example: "Male"
+            age:
+              type: integer
+              example: 31
+            dob:
+              type: string
+              example: "1994-06-10"
 
     CustomerCreateRequest:
       type: object
