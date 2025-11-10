@@ -74,6 +74,12 @@
 			<artifactId>jakarta.validation-api</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -135,6 +141,33 @@
 								<interfaceOnly>true</interfaceOnly>
 								<useTags>true</useTags>
 								<skipDefaultInterface>true</skipDefaultInterface>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-profile-service-client-code</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<generatorName>spring</generatorName>
+							<inputSpec>${project.basedir}/../openapi-specs/profile-service-v1.yaml</inputSpec>
+							<output>${project.build.directory}/generated-sources/profile</output>
+							<apiPackage>com.portfolio.elite.clients.profileservice.v1.api</apiPackage>
+							<modelPackage>com.portfolio.elite.clients.profileservice.v1.model</modelPackage>
+							<configOptions>
+								<library>spring-cloud</library>
+								<useFeignClient>true</useFeignClient>
+								<useTags>true</useTags>
+								<useJakartaEe>true</useJakartaEe>
 							</configOptions>
 						</configuration>
 					</execution>
