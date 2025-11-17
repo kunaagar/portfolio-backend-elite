@@ -3,3 +3,12 @@
 logging:
   level:
     com.portfolio.elite: DEBUG
+  config: classpath:logback-spring.xml
+
+elite:
+  logging:
+    config:
+      correlation:
+        enabled: true
+        header-name: X-Correlation-ID
+        mdc-enabled: true

@@ -19,3 +19,11 @@ management:
 profiles:
   name: profile-service
   url: http://localhost:9091
+
+elite:
+  logging:
+    config:
+      correlation:
+        enabled: true
+        header-name: X-Correlation-ID
+        mdc-enabled: true
