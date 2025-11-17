@@ -24,6 +24,8 @@
     <swagger-annotations.version>2.2.22</swagger-annotations.version>
     <springdoc-openapi-starter-webmvc-ui.version>2.8.8</springdoc-openapi-starter-webmvc-ui.version>
     <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
+
+    <elite-observability-starter.version>2025.11</elite-observability-starter.version>
   </properties>
 
   <dependencies>
@@ -50,6 +52,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.portfolio.elite</groupId>
+      <artifactId>elite-observability-starter</artifactId>
+      <version>${elite-observability-starter.version}</version>
     </dependency>
   </dependencies>
 

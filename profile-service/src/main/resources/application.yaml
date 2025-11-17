@@ -11,3 +11,10 @@ management:
       exposure:
         include: health, info, prometheus
 
+elite:
+  logging:
+    config:
+      correlation:
+        enabled: true
+        header-name: X-Correlation-ID
+        mdc-enabled: true
