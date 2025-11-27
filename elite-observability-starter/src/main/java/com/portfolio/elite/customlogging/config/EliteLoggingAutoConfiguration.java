@@ -25,7 +25,7 @@ public class EliteLoggingAutoConfiguration {
     private final EliteLoggingConfigurationProperties config;
 
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(name = "correlationFilter")
     @ConditionalOnProperty(
         name = "elite.logging.config.correlation.enabled",
         havingValue = "true",
