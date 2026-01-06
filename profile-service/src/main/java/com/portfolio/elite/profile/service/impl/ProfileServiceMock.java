@@ -1,5 +1,6 @@
 package com.portfolio.elite.profile.service.impl;
 
+import com.portfolio.elite.errors.exception.InternalServerErrorException;
 import com.portfolio.elite.profile.service.IProfileService;
 import com.portfolio.elite.profileservice.v1.model.GetProfileResponse;
 import jakarta.annotation.PostConstruct;
@@ -14,11 +15,12 @@ public class ProfileServiceMock implements IProfileService {
 
     @Override
     public GetProfileResponse findProfileById(String id) {
-        return new GetProfileResponse()
+        throw new InternalServerErrorException("profile service: unexpected error occurred");
+        /*return new GetProfileResponse()
             .id(id)
             .age(32)
             .dob("1994-06-10")
-            .gender("MALE");
+            .gender("MALE");*/
     }
 
     @PostConstruct
