@@ -26,6 +26,7 @@
     <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
 
     <elite-observability-starter.version>2025.11</elite-observability-starter.version>
+    <elit-error-manager.version>2025.11</elit-error-manager.version>
   </properties>
 
   <dependencies>
@@ -57,6 +58,11 @@
       <groupId>com.portfolio.elite</groupId>
       <artifactId>elite-observability-starter</artifactId>
       <version>${elite-observability-starter.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.portfolio.elite</groupId>
+      <artifactId>elit-error-manager</artifactId>
+      <version>${elit-error-manager.version}</version>
     </dependency>
   </dependencies>
 
