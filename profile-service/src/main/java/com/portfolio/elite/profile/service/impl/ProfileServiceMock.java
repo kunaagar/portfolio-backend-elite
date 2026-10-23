@@ -1,6 +1,6 @@
 package com.portfolio.elite.profile.service.impl;
 
-import com.portfolio.elite.errors.exception.InternalServerErrorException;
+import com.portfolio.elite.errors.exception.ResourceNotFoundException;
 import com.portfolio.elite.profile.service.IProfileService;
 import com.portfolio.elite.profileservice.v1.model.GetProfileResponse;
 import jakarta.annotation.PostConstruct;
@@ -15,12 +15,8 @@ public class ProfileServiceMock implements IProfileService {
 
     @Override
     public GetProfileResponse findProfileById(String id) {
-        throw new InternalServerErrorException("profile service: unexpected error occurred");
-        /*return new GetProfileResponse()
-            .id(id)
-            .age(32)
-            .dob("1994-06-10")
-            .gender("MALE");*/
+        log.error("Profile with id [{}] is not found", id);
+        throw new ResourceNotFoundException("Profile with id ["+id+"] is not found");
     }
 
     @PostConstruct

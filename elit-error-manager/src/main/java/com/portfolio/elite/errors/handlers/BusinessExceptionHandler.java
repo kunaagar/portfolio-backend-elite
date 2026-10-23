@@ -2,6 +2,7 @@ package com.portfolio.elite.errors.handlers;
 
 import com.portfolio.elite.errors.api.ApiErrorResponseDTO;
 import com.portfolio.elite.errors.exception.BusinessException;
+import com.portfolio.elite.errors.exception.EliteFeignClientException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
@@ -32,5 +33,34 @@ public class BusinessExceptionHandler extends BaseExceptionHandler {
             .build();
 
         return ResponseEntity.status(ex.getHttpStatus()).body(body);
+    }
+
+    @ExceptionHandler(EliteFeignClientException.class)
+    public ResponseEntity<ApiErrorResponseDTO> handleFeignClientException(
+        EliteFeignClientException ex,
+        HttpServletRequest request) {
+        final var correlationId = extractCorrelationId(request);
+        // Log with both our correlation ID and downstream's
+        log.warn("[CorrelationId: {}] Downstream service '{}' error | " +
+                "Status: {} | DownstreamCorrelationId: {} | ErrorCode: {} | Message: {}",
+            correlationId,
+            ex.getServiceName(),
+            ex.getHttpStatus().value(),
+            ex.getDownstreamCorrelationId(),
+            ex.getDownstreamErrorCode(),
+            ex.getDownstreamMessage());
+
+        final var body = ApiErrorResponseDTO.builder()
+            .correlationId(correlationId)  // Our correlation ID
+            .timestamp(LocalDateTime.now())
+            .errorCode(ex.getDownstreamErrorCode())  // Downstream's error code
+            .status(ex.getHttpStatus().value())  // Downstream's HTTP status
+            .path(request.getRequestURI())
+            .message(ex.getMessage())  // Clean message (no JSONString message)
+            .build();
+
+        return ResponseEntity
+            .status(ex.getHttpStatus())
+            .body(body);
     }
 }
