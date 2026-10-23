@@ -3,6 +3,8 @@ package com.portfolio.elite.errors.handlers;
 import com.portfolio.elite.errors.api.ApiErrorResponseDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -15,9 +17,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * Catches all unhandled exceptions as a safety net.
  * Should be the LAST resort - if an exception reaches here, it's unexpected.
  */
-@RestControllerAdvice
+//@RestControllerAdvice
 @Slf4j
-@Order(3)
+//@Order(3)
 public class GlobalExceptionHandler extends BaseExceptionHandler {
 
     @ExceptionHandler(Exception.class)
@@ -40,4 +42,9 @@ public class GlobalExceptionHandler extends BaseExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
     }
 
+    public static void main(String[] args) {
+        final var map = new HashMap<>();
+        final var test = Map.of();
+        test.putAll(map);
+    }
 }
